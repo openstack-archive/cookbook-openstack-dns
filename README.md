@@ -1,5 +1,3 @@
-![Chef OpenStack Logo](https://www.openstack.org/themes/openstack/images/project-mascots/Chef%20OpenStack/OpenStack_Project_Chef_horizontal.png)
-
 Description
 ===========
 
@@ -63,8 +61,10 @@ License and Author
 |                      |                                                    |
 |:---------------------|:---------------------------------------------------|
 | **Author**           |  Dr. Jens Harbott (<j.harbott@x-ion.de>)           |
+| **Author**           |  Jan Klare (<j.klare@cloudbau.de>)           |
 |                      |                                                    |
 | **Copyright**        |  Copyright (c) 2017, x-ion GmbH.                   |
+| **Copyright**        |  Copyright (c) 2017, cloudbau GmbH.                   |
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

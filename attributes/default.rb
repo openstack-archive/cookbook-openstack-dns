@@ -4,6 +4,8 @@
 # Attributes:: default
 #
 # Copyright 2017, x-ion GmbH
+# Copyright 2017, cloudbau GmbH
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -49,20 +51,18 @@ default['openstack']['dns']['ec2authtoken']['auth']['version'] = 'v2.0'
 default['openstack']['dns']['api']['auth']['version'] = node['openstack']['api']['auth']['version']
 
 # platform-specific settings
+default['openstack']['dns']['user'] = 'designate'
+default['openstack']['dns']['group'] = 'designate'
 case platform_family
-# Note(jh): TBC
+  # Note(jh): TBC
 when 'rhel'
-  default['openstack']['dns']['user'] = 'designate'
-  default['openstack']['dns']['group'] = 'designate'
   default['openstack']['dns']['platform'] = {
-    'designate_common_packages' => ['openstack-designate'],
+    'designate_packages' => ['openstack-designate'],
     'designate_api_service' => 'openstack-designate-api',
     'designate_central_service' => 'openstack-designate-central',
     'package_overrides' => ''
   }
 when 'debian'
-  default['openstack']['dns']['user'] = 'designate'
-  default['openstack']['dns']['group'] = 'designate'
   default['openstack']['dns']['platform'] = {
     'designate_packages' => ['designate'],
     'designate_api_service' => 'designate-api',
