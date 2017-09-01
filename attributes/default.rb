@@ -20,14 +20,14 @@
 #
 
 %w(public internal).each do |ep_type|
-  # openstack designate-api service endpoints (used by users and services)
-  default['openstack']['endpoints'][ep_type]['designate-api']['host'] = '127.0.0.1'
-  default['openstack']['endpoints'][ep_type]['designate-api']['scheme'] = 'http'
-  default['openstack']['endpoints'][ep_type]['designate-api']['path'] = '/v1/%(tenant_id)s'
-  default['openstack']['endpoints'][ep_type]['designate-api']['port'] = 9001
+  # openstack dns-api service endpoints (used by users and services)
+  default['openstack']['endpoints'][ep_type]['dns-api']['host'] = '127.0.0.1'
+  default['openstack']['endpoints'][ep_type]['dns-api']['scheme'] = 'http'
+  default['openstack']['endpoints'][ep_type]['dns-api']['path'] = '/v1/%(tenant_id)s'
+  default['openstack']['endpoints'][ep_type]['dns-api']['port'] = 9001
 end
-default['openstack']['bind_service']['all']['designate-api']['host'] = '127.0.0.1'
-default['openstack']['bind_service']['all']['designate-api']['port'] = 9001
+default['openstack']['bind_service']['all']['dns-api']['host'] = '127.0.0.1'
+default['openstack']['bind_service']['all']['dns-api']['port'] = 9001
 
 # Set to some text value if you want templated config files
 # to contain a custom banner at the top of the written file
