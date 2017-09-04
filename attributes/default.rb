@@ -23,7 +23,6 @@
   # openstack dns-api service endpoints (used by users and services)
   default['openstack']['endpoints'][ep_type]['dns-api']['host'] = '127.0.0.1'
   default['openstack']['endpoints'][ep_type]['dns-api']['scheme'] = 'http'
-  default['openstack']['endpoints'][ep_type]['dns-api']['path'] = '/v1/%(tenant_id)s'
   default['openstack']['endpoints'][ep_type]['dns-api']['port'] = 9001
 end
 default['openstack']['bind_service']['all']['dns-api']['host'] = '127.0.0.1'
