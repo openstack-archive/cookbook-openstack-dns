@@ -68,18 +68,20 @@ end
 db_user = node['openstack']['db']['dns']['username']
 db_pass = get_password 'db', 'designate'
 
+public_identity_endpoint = public_endpoint 'identity'
 identity_endpoint = internal_endpoint 'identity'
 
 bind_services = node['openstack']['bind_service']['all']
 api_bind = bind_services['dns-api']
 
-auth_uri = auth_uri_transform identity_endpoint.to_s, node['openstack']['dns']['api']['auth']['version']
+auth_url = auth_uri_transform identity_endpoint.to_s, node['openstack']['dns']['api']['auth']['version']
 
 # define attributes that are needed in designate.conf
 node.default['openstack']['dns']['conf'].tap do |conf|
   conf['service:api']['api_host'] = bind_address api_bind
   conf['service:api']['api_port'] = api_bind.port
-  conf['keystone_authtoken']['auth_url'] = auth_uri
+  conf['keystone_authtoken']['auth_uri'] = public_identity_endpoint
+  conf['keystone_authtoken']['auth_url'] = auth_url
 end
 
 # define secrets that are needed in designate.conf
