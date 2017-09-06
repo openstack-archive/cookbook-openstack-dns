@@ -31,7 +31,6 @@ platform_options = node['openstack']['dns']['platform']
 platform_options['designate_packages'].each do |pkg|
   package pkg do
     options platform_options['package_overrides']
-
     action :upgrade
   end
 end
@@ -68,7 +67,7 @@ end
 db_user = node['openstack']['db']['dns']['username']
 db_pass = get_password 'db', 'designate'
 
-public_identity_endpoint = public_endpoint 'identity'
+public_identity_endpoint = identity_uri_transform(public_endpoint 'identity')
 identity_endpoint = internal_endpoint 'identity'
 
 bind_services = node['openstack']['bind_service']['all']
@@ -113,11 +112,38 @@ template '/etc/designate/designate.conf' do
   )
 end
 
+# delete all secrets saved in the attribute
+# node['openstack']['dns']['conf_secrets'] after creating the config file
+ruby_block "delete all attributes in node['openstack']['dns']['conf_secrets']" do
+  block do
+    node.rm(:openstack, :dns, :conf_secrets)
+  end
+end
+
+rndc_secret = get_password 'token', 'designate_rndc'
+template '/etc/designate/rndc.key' do
+  source 'rndc.key.erb'
+  owner node['openstack']['dns']['user']
+  group node['openstack']['dns']['group']
+  mode 00440
+  variables(
+    secret: rndc_secret
+  )
+end
+
+pool_config = node['openstack']['dns']['pool']
 template '/etc/designate/pools.yaml' do
   source 'pools.yaml.erb'
   owner node['openstack']['dns']['user']
   group node['openstack']['dns']['group']
   mode 00644
+  variables(
+    banner: node['openstack']['dns']['custom_template_banner'],
+    bind_host: pool_config['bind_host'],
+    masters: pool_config['masters'],
+    ns_address: pool_config['ns_address'],
+    ns_hostname: pool_config['ns_hostname']
+  )
 end
 
 execute 'designate-manage database sync' do
