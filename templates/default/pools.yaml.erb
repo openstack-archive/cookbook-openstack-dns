@@ -1,3 +1,4 @@
+<%= @banner %>
 - name: default
   # The name is immutable. There will be no option to change the name after
   # creation and the only way will to change it will be to delete it
@@ -10,13 +11,13 @@
   # This should be a record that is created outside of designate, that
   # points to the public IP of the controller node.
   ns_records:
-    - hostname: ns1-1.example.org.
+    - hostname: <%= @ns_hostname %>
       priority: 1
 
   # List out the nameservers for this pool. These are the actual BIND servers.
   # We use these to verify changes have propagated to all nameservers.
   nameservers:
-    - host: 127.0.0.1
+    - host: <%= @ns_address %>
       port: 53
 
   # List out the targets for this pool. For BIND there will be one
@@ -31,13 +32,15 @@
       # If you have multiple controllers you can add multiple masters
       # by running designate-mdns on them, and adding them here.
       masters:
-        - host: 127.0.0.1
+<% @masters.each do |host| %>
+        - host: <%= host %>
           port: 5354
+<% end %>
 
       # BIND Configuration options
       options:
-        host: 127.0.0.1
+        host: <%= @bind_host %>
         port: 53
-        rndc_host: 127.0.0.1
+        rndc_host: <%= @bind_host %>
         rndc_port: 953
         rndc_key_file: /etc/designate/rndc.key
