@@ -49,7 +49,7 @@ default['openstack']['dns']['pool']['bind_host'] = '127.0.0.1'
 # platform-specific settings
 default['openstack']['dns']['user'] = 'designate'
 default['openstack']['dns']['group'] = 'designate'
-case platform_family
+case node['platform_family']
   # Note(jh): TBC
 when 'rhel'
   default['openstack']['dns']['platform'] = {
