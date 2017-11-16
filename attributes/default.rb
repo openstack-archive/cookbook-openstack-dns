@@ -50,8 +50,8 @@ default['openstack']['dns']['pool']['bind_host'] = '127.0.0.1'
 default['openstack']['dns']['user'] = 'designate'
 default['openstack']['dns']['group'] = 'designate'
 case node['platform_family']
-  # Note(jh): TBC
 when 'rhel'
+  # Note(jh): TBC
   default['openstack']['dns']['platform'] = {
     'designate_packages' => ['openstack-designate'],
     'designate_api_service' => 'openstack-designate-api',
@@ -60,7 +60,8 @@ when 'rhel'
   }
 when 'debian'
   default['openstack']['dns']['platform'] = {
-    'designate_packages' => ['designate-api','designate-central','designate-mdns','designate-producer','designate-worker'],
+    'designate_packages' => ['designate-api', 'designate-central', 'designate-mdns', 'designate-producer', 'designate-worker', 'bind9utils'],
+    'designate_dashboard_packages' => ['python-designate-dashboard'],
     'designate_api_service' => 'designate-api',
     'designate_central_service' => 'designate-central',
     'designate_mdns_service' => 'designate-mdns',
