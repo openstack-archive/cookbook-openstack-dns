@@ -7,7 +7,7 @@ source_url 'https://github.com/cloudbau/cookbook-openstack-dns' if respond_to?(:
 license 'Apache 2.0'
 description 'Installs and configures the Designate Service'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '0.1.0'
+version '0.2.0'
 
 %w(ubuntu redhat centos).each do |os|
   supports os

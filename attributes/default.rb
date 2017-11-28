@@ -41,10 +41,10 @@ default['openstack']['dns']['syslog']['use'] = false
 default['openstack']['dns']['api']['auth']['version'] = node['openstack']['api']['auth']['version']
 
 # Settings for the default pool
-default['openstack']['dns']['pool']['ns_hostname'] = 'ns1.example.org.'
-default['openstack']['dns']['pool']['ns_address'] = '127.0.0.1'
+default['openstack']['dns']['pool']['ns_hostnames'] = ['ns1.example.org.']
+default['openstack']['dns']['pool']['ns_addresses'] = ['127.0.0.1']
 default['openstack']['dns']['pool']['masters'] = ['127.0.0.1']
-default['openstack']['dns']['pool']['bind_host'] = '127.0.0.1'
+default['openstack']['dns']['pool']['bind_hosts'] = ['127.0.0.1']
 
 # platform-specific settings
 default['openstack']['dns']['user'] = 'designate'

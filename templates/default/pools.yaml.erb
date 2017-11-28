@@ -11,36 +11,37 @@
   # This should be a record that is created outside of designate, that
   # points to the public IP of the controller node.
   ns_records:
-    - hostname: <%= @ns_hostname %>
+<% @ns_hostnames.each do |ns_hostname| %>
+    - hostname: <%= ns_hostname %>
       priority: 1
+<% end %>
 
   # List out the nameservers for this pool. These are the actual BIND servers.
   # We use these to verify changes have propagated to all nameservers.
   nameservers:
-    - host: <%= @ns_address %>
+<% @ns_addresses.each do |ns_address| %>
+    - host: <%= ns_address %>
       port: 53
+<% end %>
 
   # List out the targets for this pool. For BIND there will be one
   # entry for each BIND server, as we have to run rndc command on each server
   targets:
+<% @bind_hosts.each do |bind_host| %>
     - type: bind9
-      description: BIND9 Server 1
+      description: BIND9 Server <%= bind_host %>
 
-      # List out the designate-mdns servers from which BIND servers should
-      # request zone transfers (AXFRs) from.
-      # This should be the IP of the controller node.
-      # If you have multiple controllers you can add multiple masters
-      # by running designate-mdns on them, and adding them here.
       masters:
-<% @masters.each do |host| %>
+<%   @masters.each do |host| %>
         - host: <%= host %>
           port: 5354
-<% end %>
+<%   end %>
 
       # BIND Configuration options
       options:
-        host: <%= @bind_host %>
+        host: <%= bind_host %>
         port: 53
-        rndc_host: <%= @bind_host %>
+        rndc_host: <%= bind_host %>
         rndc_port: 953
         rndc_key_file: /etc/designate/rndc.key
+<% end %>
