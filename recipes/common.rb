@@ -78,7 +78,7 @@ auth_url = auth_uri_transform identity_endpoint.to_s, node['openstack']['dns']['
 # define attributes that are needed in designate.conf
 node.default['openstack']['dns']['conf'].tap do |conf|
   conf['service:api']['api_host'] = bind_address api_bind
-  conf['service:api']['api_port'] = api_bind.port
+  conf['service:api']['api_port'] = api_bind['port']
   conf['keystone_authtoken']['auth_uri'] = public_identity_endpoint
   conf['keystone_authtoken']['auth_url'] = auth_url
 end
