@@ -78,7 +78,7 @@ auth_url = auth_uri_transform identity_endpoint.to_s, node['openstack']['dns']['
 # define attributes that are needed in designate.conf
 node.default['openstack']['dns']['conf'].tap do |conf|
   conf['service:api']['api_host'] = bind_address api_bind
-  conf['service:api']['api_port'] = api_bind.port
+  conf['service:api']['api_port'] = api_bind['port']
   conf['keystone_authtoken']['auth_uri'] = public_identity_endpoint
   conf['keystone_authtoken']['auth_url'] = auth_url
 end
@@ -139,10 +139,10 @@ template '/etc/designate/pools.yaml' do
   mode 00644
   variables(
     banner: node['openstack']['dns']['custom_template_banner'],
-    bind_host: pool_config['bind_host'],
+    bind_hosts: pool_config['bind_hosts'],
     masters: pool_config['masters'],
-    ns_address: pool_config['ns_address'],
-    ns_hostname: pool_config['ns_hostname']
+    ns_addresses: pool_config['ns_addresses'],
+    ns_hostnames: pool_config['ns_hostnames']
   )
 end
 

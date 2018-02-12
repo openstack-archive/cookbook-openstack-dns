@@ -70,6 +70,7 @@ end
 # Register DNS Internal-Endpoint
 openstack_endpoint service_type do
   service_name service_name
+  interface 'internal'
   url internal_designate_endpoint.to_s
   region region
   connection_params connection_params
