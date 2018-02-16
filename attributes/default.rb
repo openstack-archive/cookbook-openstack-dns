@@ -53,19 +53,22 @@ case node['platform_family']
   # Note(jh): TBC
 when 'rhel'
   default['openstack']['dns']['platform'] = {
-    'designate_packages' => ['openstack-designate'],
-    'designate_api_service' => 'openstack-designate-api',
-    'designate_central_service' => 'openstack-designate-central',
-    'package_overrides' => ''
+    'designate_packages' => ['openstack-designate-api', 'openstack-designate-central',
+                             'openstack-designate-mdns', 'openstack-designate-producer',
+                             'openstack-designate-worker'],
+    'designate_api_service' => 'designate-api',
+    'designate_central_service' => 'designate-central',
+    'package_overrides' => '',
   }
 when 'debian'
   default['openstack']['dns']['platform'] = {
-    'designate_packages' => ['designate-api','designate-central','designate-mdns','designate-producer','designate-worker'],
+    'designate_packages' => ['designate-api', 'designate-central', 'designate-mdns',
+                             'designate-producer', 'designate-worker'],
     'designate_api_service' => 'designate-api',
     'designate_central_service' => 'designate-central',
     'designate_mdns_service' => 'designate-mdns',
     'designate_producer_service' => 'designate-producer',
     'designate_worker_service' => 'designate-worker',
-    'package_overrides' => "-o Dpkg::Options::='--force-confold' -o Dpkg::Options::='--force-confdef'"
+    'package_overrides' => "-o Dpkg::Options::='--force-confold' -o Dpkg::Options::='--force-confdef'",
   }
 end
