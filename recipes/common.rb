@@ -18,7 +18,7 @@
 # limitations under the License.
 #
 
-class ::Chef::Recipe # rubocop:disable Documentation
+class ::Chef::Recipe
   include ::Openstack
 end
 
@@ -67,7 +67,7 @@ end
 db_user = node['openstack']['db']['dns']['username']
 db_pass = get_password 'db', 'designate'
 
-public_identity_endpoint = identity_uri_transform(public_endpoint 'identity')
+public_identity_endpoint = identity_uri_transform(public_endpoint('identity'))
 identity_endpoint = internal_endpoint 'identity'
 
 bind_services = node['openstack']['bind_service']['all']
@@ -78,7 +78,7 @@ auth_url = auth_uri_transform identity_endpoint.to_s, node['openstack']['dns']['
 # define attributes that are needed in designate.conf
 node.default['openstack']['dns']['conf'].tap do |conf|
   conf['service:api']['api_host'] = bind_address api_bind
-  conf['service:api']['api_port'] = api_bind.port
+  conf['service:api']['api_port'] = api_bind['port']
   conf['keystone_authtoken']['auth_uri'] = public_identity_endpoint
   conf['keystone_authtoken']['auth_url'] = auth_url
 end

@@ -20,7 +20,7 @@
 
 require 'uri'
 
-class ::Chef::Recipe # rubocop:disable Documentation
+class ::Chef::Recipe
   include ::Openstack
 end
 
@@ -49,7 +49,7 @@ connection_params = {
   openstack_username:     admin_user,
   openstack_api_key:      admin_pass,
   openstack_project_name: admin_project,
-  openstack_domain_name:  admin_domain
+  openstack_domain_name:  admin_domain,
 }
 
 # Register DNS Service
@@ -70,6 +70,7 @@ end
 # Register DNS Internal-Endpoint
 openstack_endpoint service_type do
   service_name service_name
+  interface 'internal'
   url internal_designate_endpoint.to_s
   region region
   connection_params connection_params
@@ -82,16 +83,10 @@ end
 
 # Register Service User
 openstack_user service_user do
+  role_name service_role
   project_name service_project_name
   domain_name service_domain_name
   password service_pass
   connection_params connection_params
-end
-
-## Grant Service role to Service User for Service Project ##
-openstack_user service_user do
-  role_name service_role
-  project_name service_project_name
-  connection_params connection_params
-  action :grant_role
+  action [:create, :grant_role]
 end
