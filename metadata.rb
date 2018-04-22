@@ -1,9 +1,9 @@
 # encoding: UTF-8
 name 'openstack-dns'
-maintainer 'cloudbau GmbH'
-maintainer_email 'j.klare@cloudbau.de'
+maintainer 'openstack-chef'
+maintainer_email 'openstack-dev@lists.openstack.org'
 issues_url 'https://launchpad.net/openstack-chef' if respond_to?(:issues_url)
-source_url 'https://github.com/cloudbau/cookbook-openstack-dns' if respond_to?(:source_url)
+source_url 'https://git.openstack.org/openstack/cookbook-openstack-dns' if respond_to?(:source_url)
 license 'Apache-2.0'
 description 'Installs and configures the Designate Service'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
