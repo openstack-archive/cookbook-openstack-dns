@@ -24,9 +24,8 @@ class ::Chef::Recipe
   include ::Openstack
 end
 
-identity_admin_endpoint = admin_endpoint 'identity'
-
-auth_url = ::URI.decode identity_admin_endpoint.to_s
+identity_endpoint = internal_endpoint 'identity'
+auth_url = ::URI.decode identity_endpoint.to_s
 
 internal_designate_endpoint = internal_endpoint 'dns-api'
 public_designate_endpoint = public_endpoint 'dns-api'

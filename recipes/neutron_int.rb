@@ -23,11 +23,10 @@ class ::Chef::Recipe
 end
 
 dns_endpoint = internal_endpoint 'dns-api'
-# TODO(jh): Make this more intelligent
 dns_url = dns_endpoint.to_s + '/v2'
 
 identity_endpoint = internal_endpoint 'identity'
-auth_url = auth_uri_transform identity_endpoint.to_s, node['openstack']['dns']['api']['auth']['version']
+auth_url = ::URI.decode identity_endpoint.to_s
 
 node.default['openstack']['network']['conf'].tap do |conf|
   conf['DEFAULT']['external_dns_driver'] = 'designate'
