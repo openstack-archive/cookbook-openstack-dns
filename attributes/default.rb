@@ -55,21 +55,24 @@ when 'rhel'
   default['openstack']['dns']['platform'] = {
     'designate_packages' => ['openstack-designate-api', 'openstack-designate-central',
                              'openstack-designate-mdns', 'openstack-designate-producer',
-                             'openstack-designate-worker'],
+                             'openstack-designate-worker', 'openstack-designate-sink'],
     'designate_api_service' => 'designate-api',
     'designate_central_service' => 'designate-central',
+    'designate_sink_service' => 'designate-sink',
     'package_overrides' => '',
   }
 when 'debian'
   default['openstack']['dns']['platform'] = {
     'designate_packages' => ['designate-api', 'designate-central', 'designate-mdns',
-                             'designate-producer', 'designate-worker', 'bind9utils'],
+                             'designate-producer', 'designate-worker', 'bind9utils',
+                             'designate-sink'],
     'designate_dashboard_packages' => ['python-designate-dashboard'],
     'designate_api_service' => 'designate-api',
     'designate_central_service' => 'designate-central',
     'designate_mdns_service' => 'designate-mdns',
     'designate_producer_service' => 'designate-producer',
     'designate_worker_service' => 'designate-worker',
+    'designate_sink_service' => 'designate-sink',
     'package_overrides' => "-o Dpkg::Options::='--force-confold' -o Dpkg::Options::='--force-confdef'",
   }
 end
