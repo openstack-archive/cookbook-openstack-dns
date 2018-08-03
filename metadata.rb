@@ -8,7 +8,7 @@ license 'Apache-2.0'
 description 'Installs and configures the Designate Service'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 chef_version '>= 12.5' if respond_to?(:chef_version)
-version '17.0.0'
+version '18.0.0'
 
 %w(ubuntu redhat centos).each do |os|
   supports os

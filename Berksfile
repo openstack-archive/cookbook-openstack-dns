@@ -7,4 +7,4 @@ cookbook 'openstack-identity',
 cookbook 'openstack-common',
   github: 'openstack/cookbook-openstack-common'
 cookbook 'openstackclient',
-  github: 'cloudbau/cookbook-openstackclient'
+  git: 'https://git.openstack.org/openstack/cookbook-openstackclient'
