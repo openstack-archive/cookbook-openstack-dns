@@ -71,8 +71,7 @@ identity_endpoint = internal_endpoint 'identity'
 # define attributes that are needed in designate.conf
 node.default['openstack']['dns']['conf'].tap do |conf|
   conf['database']['connection'] = sql_connection
-  conf['listen']['api_host'] = bind_address api_bind
-  conf['listen']['api_port'] = api_bind['port']
+  conf['service:api']['listen'] = "#{bind_address api_bind}:#{api_bind['port']}"
   conf['keystone_authtoken']['auth_url'] = identity_endpoint.to_s
   conf['keystone_authtoken']['www_authenticate_uri'] = identity_endpoint.to_s
 end
