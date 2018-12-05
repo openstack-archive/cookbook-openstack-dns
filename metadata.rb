@@ -1,7 +1,7 @@
 # encoding: UTF-8
 name 'openstack-dns'
 maintainer 'openstack-chef'
-maintainer_email 'openstack-dev@lists.openstack.org'
+maintainer_email 'openstack-discuss@lists.openstack.org'
 issues_url 'https://launchpad.net/openstack-chef' if respond_to?(:issues_url)
 source_url 'https://git.openstack.org/openstack/cookbook-openstack-dns' if respond_to?(:source_url)
 license 'Apache-2.0'
