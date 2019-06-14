@@ -38,8 +38,6 @@ default['openstack']['dns']['custom_template_banner'] = '
 default['openstack']['dns']['service_role'] = 'service'
 default['openstack']['dns']['syslog']['use'] = false
 
-default['openstack']['dns']['api']['auth']['version'] = node['openstack']['api']['auth']['version']
-
 # Settings for the default pool
 default['openstack']['dns']['pool']['ns_hostnames'] = ['ns1.example.org.']
 default['openstack']['dns']['pool']['ns_addresses'] = ['127.0.0.1']
