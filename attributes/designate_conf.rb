@@ -29,4 +29,4 @@ default['openstack']['dns']['conf']['keystone_authtoken']['username'] = 'designa
 default['openstack']['dns']['conf']['keystone_authtoken']['project_name'] = 'service'
 default['openstack']['dns']['conf']['keystone_authtoken']['project_domain_name'] = 'Default'
 default['openstack']['dns']['conf']['keystone_authtoken']['user_domain_name'] = 'Default'
-default['openstack']['dns']['conf']['keystone_authtoken']['keystone_authtoken.service_token_roles_required'] = 'True'
+default['openstack']['dns']['conf']['keystone_authtoken']['service_token_roles_required'] = 'True'
