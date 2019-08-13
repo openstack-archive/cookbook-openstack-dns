@@ -44,34 +44,20 @@ end
 
 if node['openstack']['mq']['service_type'] == 'rabbit'
   node.default['openstack']['dns']['conf_secrets']['DEFAULT']['transport_url'] = rabbit_transport_url 'dns'
-  # Note(jh): Workaround for https://bugs.launchpad.net/designate/+bug/1673403
-  # Stolen from rabbit_transport_url() in openstack-common/libraries/endpoints.rb
-  mq_port = node['openstack']['endpoints']['mq']['port']
-  url = ''
-  if node['openstack']['mq']['cluster']
-    node['openstack']['mq']['servers'].each do |server|
-      url += "#{server}:#{mq_port}"
-      url += ',' unless node['openstack']['mq']['servers'].last == server
-    end
-  else
-    bind_mq_address = bind_address node['openstack']['bind_service']['mq']
-    url += "#{bind_mq_address}:#{mq_port}"
-  end
 end
 
 db_user = node['openstack']['db']['dns']['username']
 db_pass = get_password 'db', 'designate'
-sql_connection = db_uri 'dns', db_user, db_pass
 
 bind_services = node['openstack']['bind_service']['all']
 api_bind = bind_services['dns-api']
+api_bind_str = "#{bind_address api_bind}:#{api_bind['port']}"
 
 identity_endpoint = internal_endpoint 'identity'
 
 # define attributes that are needed in designate.conf
 node.default['openstack']['dns']['conf'].tap do |conf|
-  conf['database']['connection'] = sql_connection
-  conf['service:api']['listen'] = "#{bind_address api_bind}:#{api_bind['port']}"
+  conf['service:api']['listen'] = api_bind_str
   conf['keystone_authtoken']['auth_url'] = identity_endpoint.to_s
   conf['keystone_authtoken']['www_authenticate_uri'] = identity_endpoint.to_s
 end
