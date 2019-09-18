@@ -61,10 +61,10 @@ when 'rhel'
   }
 when 'debian'
   default['openstack']['dns']['platform'] = {
-    'designate_packages' => ['designate-api', 'designate-central', 'designate-mdns',
+    'designate_packages' => ['python3-designate', 'designate-api', 'designate-central', 'designate-mdns',
                              'designate-producer', 'designate-worker', 'bind9utils',
                              'designate-sink'],
-    'designate_dashboard_packages' => ['python-designate-dashboard'],
+    'designate_dashboard_packages' => ['python3-designate-dashboard'],
     'designate_api_service' => 'designate-api',
     'designate_central_service' => 'designate-central',
     'designate_mdns_service' => 'designate-mdns',
