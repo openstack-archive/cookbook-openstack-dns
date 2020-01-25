@@ -25,6 +25,6 @@ platform_options = node['openstack']['dns']['platform']
 service 'designate_central' do
   service_name platform_options['designate_central_service']
   supports status: true, restart: true
-  action :enable
+  action [:enable, :start]
   subscribes :restart, 'template[/etc/designate/designate.conf]'
 end

@@ -24,6 +24,7 @@ recipe 'worker', 'Starts and enables the designate-worker service'
   supports os
 end
 
+depends 'openstackclient'
 depends 'openstack-common', '>= 18.0.0'
 depends 'openstack-identity', '>= 18.0.0'
-depends 'openstackclient'
+depends 'openstack-network', '>= 18.0.0'

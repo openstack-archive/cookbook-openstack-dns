@@ -25,6 +25,6 @@ platform_options = node['openstack']['dns']['platform']
 service 'designate_mdns' do
   service_name platform_options['designate_mdns_service']
   supports status: true, restart: true
-  action :enable
+  action [:enable, :start]
   subscribes :restart, 'template[/etc/designate/designate.conf]'
 end

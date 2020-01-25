@@ -43,19 +43,22 @@ default['openstack']['dns']['pool']['ns_hostnames'] = ['ns1.example.org.']
 default['openstack']['dns']['pool']['ns_addresses'] = ['127.0.0.1']
 default['openstack']['dns']['pool']['masters'] = ['127.0.0.1']
 default['openstack']['dns']['pool']['bind_hosts'] = ['127.0.0.1']
+default['openstack']['dns']['pool']['rndc_key'] = '/etc/designate/rndc.key'
 
 # platform-specific settings
 default['openstack']['dns']['user'] = 'designate'
 default['openstack']['dns']['group'] = 'designate'
 case node['platform_family']
 when 'rhel'
-  # Note(jh): TBC
   default['openstack']['dns']['platform'] = {
     'designate_packages' => ['openstack-designate-api', 'openstack-designate-central',
                              'openstack-designate-mdns', 'openstack-designate-producer',
                              'openstack-designate-worker', 'openstack-designate-sink'],
     'designate_api_service' => 'designate-api',
     'designate_central_service' => 'designate-central',
+    'designate_mdns_service' => 'designate-mdns',
+    'designate_producer_service' => 'designate-producer',
+    'designate_worker_service' => 'designate-worker',
     'designate_sink_service' => 'designate-sink',
     'package_overrides' => '',
   }

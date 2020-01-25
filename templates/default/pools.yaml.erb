@@ -43,5 +43,5 @@
         port: 53
         rndc_host: <%= bind_host %>
         rndc_port: 953
-        rndc_key_file: /etc/designate/rndc.key
+        rndc_key_file: <%= @rndc_key %>
 <% end %>

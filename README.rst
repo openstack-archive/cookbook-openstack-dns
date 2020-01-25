@@ -39,6 +39,7 @@ The following cookbooks are dependencies:
 -  'openstackclient'
 -  'openstack-common', '>= 18.0.0'
 -  'openstack-identity', '>= 18.0.0'
+-  'openstack-network', '>= 18.0.0'
 
 Attributes
 ==========
@@ -115,13 +116,13 @@ License and Author
 | **Author**      | Lance Albertson (lance@osuosl.org)      |
 +-----------------+-----------------------------------------+
 
-+-----------------+---------------------------------------------+
-| **Copyright**   | Copyright (c) 2017-2019, x-ion GmbH.        |
-+-----------------+---------------------------------------------+
-| **Copyright**   | Copyright (c) 2017, cloudbau GmbH.          |
-+-----------------+---------------------------------------------+
-| **Copyright**   | Copyright (c) 2019, Oregon State University |
-+-----------------+---------------------------------------------+
++-----------------+--------------------------------------------------+
+| **Copyright**   | Copyright (c) 2017-2019, x-ion GmbH.             |
++-----------------+--------------------------------------------------+
+| **Copyright**   | Copyright (c) 2017, cloudbau GmbH.               |
++-----------------+--------------------------------------------------+
+| **Copyright**   | Copyright (c) 2019-2020, Oregon State University |
++-----------------+--------------------------------------------------+
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may
 not use this file except in compliance with the License. You may obtain

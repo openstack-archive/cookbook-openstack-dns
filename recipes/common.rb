@@ -22,6 +22,8 @@ class ::Chef::Recipe
   include ::Openstack
 end
 
+include_recipe 'openstack-common'
+
 if node['openstack']['dns']['syslog']['use']
   include_recipe 'openstack-common::logging'
 end
@@ -100,17 +102,19 @@ ruby_block "delete all attributes in node['openstack']['dns']['conf_secrets']" d
 end
 
 rndc_secret = get_password 'token', 'designate_rndc'
-template '/etc/designate/rndc.key' do
+pool_config = node['openstack']['dns']['pool']
+
+template pool_config['rndc_key'] do
   source 'rndc.key.erb'
   owner node['openstack']['dns']['user']
   group node['openstack']['dns']['group']
+  sensitive true
   mode 00440
   variables(
     secret: rndc_secret
   )
 end
 
-pool_config = node['openstack']['dns']['pool']
 template '/etc/designate/pools.yaml' do
   source 'pools.yaml.erb'
   owner node['openstack']['dns']['user']
@@ -121,7 +125,8 @@ template '/etc/designate/pools.yaml' do
     bind_hosts: pool_config['bind_hosts'],
     masters: pool_config['masters'],
     ns_addresses: pool_config['ns_addresses'],
-    ns_hostnames: pool_config['ns_hostnames']
+    ns_hostnames: pool_config['ns_hostnames'],
+    rndc_key: pool_config['rndc_key']
   )
 end
 
