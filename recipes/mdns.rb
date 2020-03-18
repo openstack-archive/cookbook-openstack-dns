@@ -1,9 +1,10 @@
 # encoding: UTF-8
 #
-# Cookbook Name:: openstack-dns
+# Cookbook:: openstack-dns
 # Recipe:: mdns
 #
-# Copyright 2017, x-ion GmbH
+# Copyright:: 2017, x-ion GmbH
+# Copyright:: 2020, Oregon State University
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

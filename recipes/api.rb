@@ -1,9 +1,10 @@
 # encoding: UTF-8
 #
-# Cookbook Name:: openstack-dns
+# Cookbook:: openstack-dns
 # Recipe:: api
 #
-# Copyright 2017, x-ion GmbH
+# Copyright:: 2017, x-ion GmbH
+# Copyright:: 2019-2020, Oregon State University
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +26,6 @@ platform_options = node['openstack']['dns']['platform']
 service 'designate-api' do
   service_name platform_options['designate_api_service']
   supports status: true, restart: true
-
   action [:enable, :start]
   subscribes :restart, 'template[/etc/designate/designate.conf]'
 end

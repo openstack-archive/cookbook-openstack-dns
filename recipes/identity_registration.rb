@@ -1,9 +1,10 @@
 # encoding: UTF-8
 #
-# Cookbook Name:: openstack-dns
+# Cookbook:: openstack-dns
 # Recipe:: identity_registration
 #
-# Copyright 2017, x-ion GmbH
+# Copyright:: 2017, x-ion GmbH
+# Copyright:: 2019-2020, Oregon State University
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,11 +45,11 @@ admin_domain = node['openstack']['identity']['admin_domain_name']
 region = node['openstack']['region']
 
 connection_params = {
-  openstack_auth_url:     auth_url,
-  openstack_username:     admin_user,
-  openstack_api_key:      admin_pass,
+  openstack_auth_url: auth_url,
+  openstack_username: admin_user,
+  openstack_api_key: admin_pass,
   openstack_project_name: admin_project,
-  openstack_domain_name:  admin_domain,
+  openstack_domain_name: admin_domain,
 }
 
 # Register DNS Service

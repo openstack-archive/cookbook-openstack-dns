@@ -1,9 +1,10 @@
 # encoding: UTF-8
 #
-# Cookbook Name:: openstack-dns
+# Cookbook:: openstack-dns
 # Recipe:: common
 #
-# Copyright 2017, x-ion Gmbh
+# Copyright:: 2017, x-ion Gmbh
+# Copyright:: 2019-2020, Oregon State University
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,18 +31,14 @@ end
 
 platform_options = node['openstack']['dns']['platform']
 
-platform_options['designate_packages'].each do |pkg|
-  package pkg do
-    options platform_options['package_overrides']
-    action :upgrade
-  end
+package platform_options['designate_packages'] do
+  options platform_options['package_overrides']
+  action :upgrade
 end
 
 db_type = node['openstack']['db']['dns']['service_type']
-node['openstack']['db']['python_packages'][db_type].each do |pkg|
-  package pkg do
-    action :upgrade
-  end
+package node['openstack']['db']['python_packages'][db_type] do
+  action :upgrade
 end
 
 if node['openstack']['mq']['service_type'] == 'rabbit'
@@ -78,8 +75,7 @@ designate_conf_options = merge_config_options 'dns'
 directory '/etc/designate' do
   owner node['openstack']['dns']['user']
   group node['openstack']['dns']['group']
-  mode 00750
-  action :create
+  mode '750'
 end
 
 template '/etc/designate/designate.conf' do
@@ -87,7 +83,8 @@ template '/etc/designate/designate.conf' do
   cookbook 'openstack-common'
   owner node['openstack']['dns']['user']
   group node['openstack']['dns']['group']
-  mode 00640
+  mode '640'
+  sensitive true
   variables(
     service_config: designate_conf_options
   )
@@ -109,7 +106,7 @@ template pool_config['rndc_key'] do
   owner node['openstack']['dns']['user']
   group node['openstack']['dns']['group']
   sensitive true
-  mode 00440
+  mode '440'
   variables(
     secret: rndc_secret
   )
@@ -119,7 +116,7 @@ template '/etc/designate/pools.yaml' do
   source 'pools.yaml.erb'
   owner node['openstack']['dns']['user']
   group node['openstack']['dns']['group']
-  mode 00644
+  mode '644'
   variables(
     banner: node['openstack']['dns']['custom_template_banner'],
     bind_hosts: pool_config['bind_hosts'],

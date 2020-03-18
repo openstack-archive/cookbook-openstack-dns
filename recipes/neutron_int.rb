@@ -1,9 +1,10 @@
 # encoding: UTF-8
 #
-# Cookbook Name:: openstack-dns
+# Cookbook:: openstack-dns
 # Recipe:: neutron_int
 #
-# Copyright 2017, x-ion GmbH
+# Copyright:: 2017, x-ion GmbH
+# Copyright:: 2020, Oregon State University
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -40,6 +41,5 @@ node.default['openstack']['network']['conf'].tap do |conf|
 end
 
 node.default['openstack']['network']['conf_secrets'].tap do |conf_secrets|
-  conf_secrets['designate']['password'] =
-    get_password 'service', 'openstack-dns'
+  conf_secrets['designate']['password'] = get_password 'service', 'openstack-dns'
 end

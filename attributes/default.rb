@@ -1,10 +1,11 @@
 # encoding: UTF-8
 #
-# Cookbook Name:: openstack-dns
+# Cookbook:: openstack-dns
 # Attributes:: default
 #
-# Copyright 2017, x-ion GmbH
-# Copyright 2017, cloudbau GmbH
+# Copyright:: 2017, x-ion GmbH
+# Copyright:: 2017, cloudbau GmbH
+# Copyright:: 2019-2020, Oregon State University
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -51,9 +52,15 @@ default['openstack']['dns']['group'] = 'designate'
 case node['platform_family']
 when 'rhel'
   default['openstack']['dns']['platform'] = {
-    'designate_packages' => ['openstack-designate-api', 'openstack-designate-central',
-                             'openstack-designate-mdns', 'openstack-designate-producer',
-                             'openstack-designate-worker', 'openstack-designate-sink'],
+    'designate_packages' =>
+      %w(
+        openstack-designate-api
+        openstack-designate-central
+        openstack-designate-mdns
+        openstack-designate-producer
+        openstack-designate-worker
+        openstack-designate-sink
+      ),
     'designate_api_service' => 'designate-api',
     'designate_central_service' => 'designate-central',
     'designate_mdns_service' => 'designate-mdns',
@@ -64,10 +71,18 @@ when 'rhel'
   }
 when 'debian'
   default['openstack']['dns']['platform'] = {
-    'designate_packages' => ['python3-designate', 'designate-api', 'designate-central', 'designate-mdns',
-                             'designate-producer', 'designate-worker', 'bind9utils',
-                             'designate-sink'],
-    'designate_dashboard_packages' => ['python3-designate-dashboard'],
+    'designate_packages' =>
+      %w(
+        python3-designate
+        designate-api
+        designate-central
+        designate-mdns
+        designate-producer
+        designate-worker
+        bind9utils
+        designate-sink
+      ),
+    'designate_dashboard_packages' => %w(python3-designate-dashboard),
     'designate_api_service' => 'designate-api',
     'designate_central_service' => 'designate-central',
     'designate_mdns_service' => 'designate-mdns',

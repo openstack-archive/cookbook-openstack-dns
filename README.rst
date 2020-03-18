@@ -20,9 +20,9 @@ https://docs.openstack.org/designate/latest/
 Requirements
 ============
 
-- Chef 14 or higher
-- ChefDK 3.2.30 for testing (also includes Berkshelf for cookbook
-  dependency resolution)
+- Chef 15 or higher
+- Chef Workstation 0.15.18 for testing (also includes Berkshelf for
+  cookbook dependency resolution)
 
 Platform
 ========
@@ -37,9 +37,9 @@ Cookbooks
 The following cookbooks are dependencies:
 
 -  'openstackclient'
--  'openstack-common', '>= 18.0.0'
--  'openstack-identity', '>= 18.0.0'
--  'openstack-network', '>= 18.0.0'
+-  'openstack-common', '>= 19.0.0'
+-  'openstack-identity', '>= 19.0.0'
+-  'openstack-network', '>= 19.0.0'
 
 Attributes
 ==========
