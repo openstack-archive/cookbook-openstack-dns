@@ -11,9 +11,3 @@
 Style/IfUnlessModifier:
   Exclude:
     - 'recipes/common.rb'
-
-# Offense count: 24
-# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
-# URISchemes: http, https
-Metrics/LineLength:
-  Max: 133
