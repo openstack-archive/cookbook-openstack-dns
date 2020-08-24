@@ -27,7 +27,7 @@ dns_endpoint = internal_endpoint 'dns-api'
 dns_url = dns_endpoint.to_s + '/v2'
 
 identity_endpoint = internal_endpoint 'identity'
-auth_url = ::URI.decode identity_endpoint.to_s
+auth_url = identity_endpoint.to_s
 
 node.default['openstack']['network']['conf'].tap do |conf|
   conf['DEFAULT']['external_dns_driver'] = 'designate'
