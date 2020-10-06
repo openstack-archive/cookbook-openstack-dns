@@ -1,4 +1,3 @@
-# encoding: UTF-8
 name              'openstack-dns'
 maintainer        'openstack-chef'
 maintainer_email  'openstack-discuss@lists.openstack.org'
