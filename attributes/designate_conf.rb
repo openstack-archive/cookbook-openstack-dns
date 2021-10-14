@@ -2,7 +2,7 @@
 # Cookbook:: openstack-dns
 # Attributes:: default
 #
-# Copyright:: 2017, x-ion GmbH
+# Copyright:: 2017-2021, x-ion GmbH
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
